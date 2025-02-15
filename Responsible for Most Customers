@@ -1,0 +1,5 @@
+import pandas as pd
+df = pd.merge(map_employee_territory,map_customer_territory,on='territory_id',how='left')
+df['num_cust'] = df.groupby('empl_id')['cust_id'].transform('count')
+df['ranks'] = df['num_cust'].rank(method='dense', ascending=False)
+df.query("ranks == 1")[['empl_id',"num_cust"]].rename(columns={'num_cust':'n_customers'}).drop_duplicates()
