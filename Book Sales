@@ -1,0 +1,5 @@
+import pandas as pd
+df = pd.merge(amazon_books, amazon_books_order_details, on='book_id',how='left')
+df['revenue'] = df['unit_price']*df['quantity']
+df['total_revenue'] = df.groupby('book_id')['revenue'].transform('sum')
+df[["book_id", 'total_revenue']].drop_duplicates()
