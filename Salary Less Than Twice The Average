@@ -1,0 +1,8 @@
+import pandas as pd
+managers = pd.merge(map_employee_hierarchy,dim_employee,how='left',left_on='manager_empl_id',right_on='empl_id')
+managers = managers[["manager_empl_id","salary"]].rename(columns={'salary':'manager_salary'})
+employees = pd.merge(map_employee_hierarchy,dim_employee,how='left',left_on='empl_id',right_on='empl_id')
+employees = employees[["manager_empl_id", "salary"]].rename(columns={'salary':'emp_salary'})
+employees['avg_sal'] = employees.groupby('manager_empl_id')['emp_salary'].transform('mean')
+final = pd.merge(managers,employees,on='manager_empl_id',how='inner')
+final.query("manager_salary < 2*avg_sal")[['manager_empl_id','manager_salary','avg_sal']].drop_duplicates()
