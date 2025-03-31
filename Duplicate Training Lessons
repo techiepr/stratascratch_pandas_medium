@@ -1,0 +1,8 @@
+import pandas as pd
+import datetime as dt
+u1 = users_training.copy()
+t1 = training_details.copy()
+df1 = u1.merge(t1,how="inner",left_on='u_id',right_on='u_id')
+df1["dates"] = df1["training_date"].dt.date
+df1["n_attended"] = df1.groupby(["u_id","dates","training_id"])["training_id"].transform('count')
+df1[df1["n_attended"]>1][["u_name","training_id","training_date","n_attended"]].drop_duplicates()
