@@ -1,0 +1,9 @@
+import pandas as pd
+import datetime as dt
+df = amazon_orders
+df["year"] = df["order_date"].dt.year
+df = df[df["year"].isin([2020,2021])]
+df["count_years"] = df.groupby("user_id")["year"].transform("nunique")
+df1 = df[df["count_years"] == 2]
+df1["num_orders"] =df.groupby("user_id")["id"].transform("count")
+df1[df1["num_orders"] >= 6]["user_id"].drop_duplicates()
