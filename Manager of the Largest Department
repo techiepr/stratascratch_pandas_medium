@@ -1,5 +1,18 @@
 import pandas as pd
 df = az_employees
+df["num_emp"] = df.groupby("department_id")["id"].transform("count")
+df["rank"] = df["num_emp"].rank(method='dense', ascending = False)
+df1 = df[df["rank"] == 1]
+df1[df1["position"].str.lower().str.contains("manager")][["first_name", "last_name"]]
+
+
+
+
+
+
+
+import pandas as pd
+df = az_employees
 df['nums'] = df.groupby('department_name')["id"].transform('count')
 df['ranks'] = df["nums"].rank(method='dense',ascending=False)
 df1 = df[df['ranks'] == 1]
