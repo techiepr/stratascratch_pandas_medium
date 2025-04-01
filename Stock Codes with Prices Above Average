@@ -1,0 +1,4 @@
+import pandas as pd
+df = online_retails.copy()
+df["avg"] = df["unitprice"].mean()
+df[df["unitprice"] > df["avg"]][["productcode","unitprice"]]
