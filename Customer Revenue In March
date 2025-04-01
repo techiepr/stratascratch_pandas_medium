@@ -1,0 +1,9 @@
+import pandas as pd
+import datetime as dt
+df = orders.copy()
+df["years"] = df["order_date"].dt.year
+df["months"] = df["order_date"].dt.month
+df1 = df[df["years"] == 2019]
+df2 = df1[df1["months"] == 3]
+df2['revenue'] = df2.groupby("cust_id")["total_order_cost"].transform("sum")
+df2[["cust_id","revenue"]].drop_duplicates()
