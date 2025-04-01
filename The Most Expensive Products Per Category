@@ -1,0 +1,5 @@
+import pandas as pd
+df = innerwear_amazon_com.copy()
+df["new_price"] = df["price"].str.replace('$',"",regex=False).astype(float)
+df["ranks"] = df.groupby("product_category")["new_price"].rank(method="dense", ascending=False)
+df[df["ranks"] == 1][["product_category","product_name","new_price"]]
