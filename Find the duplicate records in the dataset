@@ -1,0 +1,7 @@
+import pandas as pd
+import datetime as dt
+df = title.copy()
+df['duplicate_count'] = df.groupby(["worker_title","affected_from"])["worker_ref_id"].transform("count")
+df[df["duplicate_count"] > 1][["worker_title","affected_from","duplicate_count"]].drop_duplicates()
+df["new_affected_from"] = pd.to_datetime(df["affected_from"]).dt.strftime("%Y-%m-%d")
+df[df["duplicate_count"] > 1][["worker_title","new_affected_from","duplicate_count"]].rename(columns={"duplicate_count":"n_affected"}).drop_duplicates()
