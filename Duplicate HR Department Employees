@@ -1,0 +1,5 @@
+import pandas as pd
+df = worker.copy()
+df1 = df[df["department"].str.lower().str.contains("hr")]
+df2 = pd.concat([df1,df1])
+df2[["first_name","department"]]
