@@ -1,0 +1,5 @@
+import pandas as pd
+df = worker.copy()
+df["rank"] =df["salary"].rank(method='dense',ascending=False)
+df["counts"] = df.groupby('rank')["worker_id"].transform("count")
+df[df["counts"] > 1][["worker_id","first_name","salary"]].sort_values(by='salary',ascending=False)
