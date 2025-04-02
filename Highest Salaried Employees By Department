@@ -1,0 +1,5 @@
+import pandas as pd
+df = worker.copy()
+df["fullname"] = df["first_name"]+" "+df["last_name"]
+df["ranks"] = df.groupby('department')["salary"].rank(method='dense', ascending=False)
+df[df["ranks"] == 1][["fullname","salary","department"]]
