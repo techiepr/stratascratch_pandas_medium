@@ -1,0 +1,5 @@
+import pandas as pd
+df = worker.copy()
+df["num"] = df["worker_id"].count()
+df["nums"] = df['num']/2
+df[df["worker_id"] <= df["nums"]].drop(columns=["num","nums"])
