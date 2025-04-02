@@ -1,0 +1,4 @@
+import pandas as pd
+df = orders.copy()
+df["num"] = df.groupby("cust_id")["id"].transform("count")
+df[df["num"] > 3][["cust_id"]].drop_duplicates()
