@@ -1,0 +1,4 @@
+import pandas as pd
+df = worker.merge(title,left_on='worker_id',right_on='worker_ref_id',how='inner')
+df['ranks'] = df["salary"].rank(method='dense', ascending=False)
+df[df['ranks'] == 1][["worker_title"]].rename(columns={'worker_title':'best_paid_title'}).drop_duplicates()
