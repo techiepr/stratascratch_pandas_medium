@@ -1,0 +1,5 @@
+import pandas as pd
+df = customers.merge(orders,how='right',left_on='id',right_on='cust_id')
+num_order = len(df)
+num_ship_orde = df['address'].notnull().sum()
+num_ship_orde/num_order*100
