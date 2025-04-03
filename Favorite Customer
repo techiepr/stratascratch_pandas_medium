@@ -1,0 +1,5 @@
+import pandas as pd
+df = customers.merge(orders,how='inner',left_on='id',right_on='cust_id')
+df["num_order"] = df.groupby('id_x')["id_y"].transform('count')
+df["total_cost"] = df.groupby("id_x")["total_order_cost"].transform('sum')
+df[(df["num_order"] > 3) & (df['total_cost'] > 100)][["first_name","city","num_order","total_cost"]].drop_duplicates()
