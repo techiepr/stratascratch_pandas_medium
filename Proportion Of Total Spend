@@ -1,0 +1,5 @@
+import pandas as pd
+df = orders.merge(customers,how='inner',left_on='cust_id',right_on='id')
+df['cus_spent'] = df.groupby("id_y")["total_order_cost"].transform('sum')
+df['ratio'] = df["total_order_cost"]/df['cus_spent']
+df[["first_name","order_details","ratio"]]
