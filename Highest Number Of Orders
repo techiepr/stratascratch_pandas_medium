@@ -1,0 +1,5 @@
+import pandas as pd
+df = customers.merge(orders,how='inner',left_on='id',right_on='cust_id')
+df['num_orders'] = df.groupby('id_x')['id_y'].transform('count')
+df["ranks"] = df['num_orders'].rank(method='dense', ascending=False)
+df[df["ranks"] == 1][["id_x","num_orders"]].drop_duplicates()
