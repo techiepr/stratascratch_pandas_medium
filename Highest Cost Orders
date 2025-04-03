@@ -1,0 +1,8 @@
+import pandas as pd
+import datetime as dt
+df = customers.merge(orders,how='inner',left_on='id',right_on='cust_id')
+df['order_date1'] = pd.to_datetime(df['order_date']).dt.strftime('%Y-%m-%d')
+df1 = df[df["order_date1"].between('2019-02-01','2019-05-01')]
+df1['total_cost'] = df1.groupby(['first_name','order_date1'])["total_order_cost"].transform('sum')
+df1["ranks"] = df1["total_cost"].rank(method='dense',ascending=False)
+df1[df1["ranks"] == 1][["first_name","total_cost","order_date1"]].drop_duplicates()
