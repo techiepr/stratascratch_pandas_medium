@@ -8,7 +8,6 @@ df1[["book_id", "total_sales"]].drop_duplicates()
 
 
 
-
 import pandas as pd
 df = pd.merge(amazon_books, amazon_books_order_details, on='book_id',how='left')
 df['revenue'] = df['unit_price']*df['quantity']
